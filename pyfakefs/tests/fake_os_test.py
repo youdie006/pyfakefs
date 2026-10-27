@@ -16,6 +16,7 @@
 """Unit tests for fake_os.FakeOsModule."""
 
 import errno
+import inspect
 import os
 import stat
 import sys
@@ -5150,6 +5151,19 @@ class FakeOsModuleDirFdTest(FakeOsModuleTestBase):
 class RealOsModuleDirFdTest(FakeOsModuleDirFdTest):
     def use_real_fs(self):
         return True
+
+
+class FakeOsModuleDirTest(unittest.TestCase):
+    def test_dir_contains_all_faked_functions(self):
+        # functions missing in dir() are not patched if imported by name
+        faked = {
+            name
+            for name, value in vars(fake_os.FakeOsModule).items()
+            if inspect.isfunction(value)
+            and not name.startswith("_")
+            and hasattr(os, name)
+        }
+        self.assertEqual(set(), faked - set(fake_os.FakeOsModule.dir()))
 
 
 class StatPropagationTest(TestCase):

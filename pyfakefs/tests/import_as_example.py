@@ -19,7 +19,7 @@ import os as my_os
 import pathlib
 import sys
 from builtins import open as bltn_open
-from os import path, stat
+from os import path, stat, truncate
 from os import stat as my_stat
 from os.path import exists, isdir, isfile, islink
 from os.path import exists as my_exists
@@ -83,6 +83,11 @@ def file_stat1(filepath):
 def file_stat2(filepath):
     # tests patching `stat` imported from os as other name
     return my_stat(filepath)
+
+
+def truncate_file(filepath, length):
+    # tests patching `truncate` imported from os
+    truncate(filepath, length)
 
 
 def system_stat(filepath):

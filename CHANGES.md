@@ -15,6 +15,7 @@ The released versions correspond to PyPI releases.
 
 ### Fixes
 
+* fixed `os` functions like `truncate`, `ftruncate`, `fchmod` and `renames` not being patched if imported by name
 * fixed `Path.glob()` not finding literal pattern parts with a different case
   in a case-insensitive filesystem (e.g. macOS) under Python 3.14
   (see [#1347](https://github.com/pytest-dev/pyfakefs/issues/1347))

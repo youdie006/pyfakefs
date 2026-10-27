@@ -102,8 +102,11 @@ class FakeOsModule:
             "close",
             "dup",
             "dup2",
+            "fchmod",
+            "fdopen",
             "fstat",
             "fsync",
+            "ftruncate",
             "getcwd",
             "lchmod",
             "link",
@@ -114,15 +117,18 @@ class FakeOsModule:
             "mkdir",
             "mknod",
             "open",
+            "pipe",
             "read",
             "readlink",
             "remove",
             "removedirs",
             "rename",
+            "renames",
             "rmdir",
             "scandir",
             "stat",
             "symlink",
+            "truncate",
             "umask",
             "unlink",
             "utime",
@@ -143,6 +149,7 @@ class FakeOsModule:
             _dir += [
                 "getgid",
                 "getuid",
+                "sendfile",
             ]
         return _dir
 

@@ -252,6 +252,12 @@ class TestPatchingImports(TestPyfakefsUnittestBase):
         stat_result = pyfakefs.tests.import_as_example.file_stat1(file_path)
         self.assertEqual(3, stat_result.st_size)
 
+    def test_import_truncate_from_os(self):
+        file_path = "/foo/bar"
+        self.fs.create_file(file_path, contents=b"abc")
+        pyfakefs.tests.import_as_example.truncate_file(file_path, 1)
+        self.assertEqual(1, os.path.getsize(file_path))
+
     def test_import_function_from_os_as_other_name(self):
         file_path = "/foo/bar"
         self.fs.create_file(file_path, contents=b"abc")
